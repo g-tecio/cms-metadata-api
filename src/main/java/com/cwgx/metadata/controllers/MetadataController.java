@@ -32,12 +32,6 @@ public class MetadataController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/getAllMetadata", method = RequestMethod.GET)
-    public List<Metadata> getAllMetadatas() {
-        return repository.findAll();
-    }
-
-    @CrossOrigin
     @RequestMapping(value = "/addMetadata", method = RequestMethod.POST)
     public Metadata createMetadata(@Valid @RequestBody Metadata metadata) {
         repository.save(metadata);
@@ -50,5 +44,10 @@ public class MetadataController {
         metadata.setId(id);
         repository.save(metadata);
         return metadata;
+    }
+
+    @RequestMapping(value = "/deleteMetadata", method = RequestMethod.DELETE)
+    public void deleteMetadata(@RequestParam(name = "id") ObjectId id) {
+        repository.delete(repository.findById(id));
     }
 }
