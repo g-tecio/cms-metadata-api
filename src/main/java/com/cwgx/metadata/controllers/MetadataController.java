@@ -19,7 +19,7 @@ public class MetadataController {
     @Autowired
     private MetadataRepository repository;
 
-    @RequestMapping(value = "/getMetadata", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     public List<Metadata> getMetadataByParams(@RequestParam(required=false) String name, @RequestParam(required=false) ObjectId id) {
         if(name != null) {
@@ -37,7 +37,8 @@ public class MetadataController {
         return repository.findAll();
     }
 
-    @RequestMapping(value = "/addMetadata/", method = RequestMethod.POST)
+    @CrossOrigin
+    @RequestMapping(value = "/addMetadata", method = RequestMethod.POST)
     public Metadata createMetadata(@Valid @RequestBody Metadata metadata) {
         repository.save(metadata);
         return metadata;
